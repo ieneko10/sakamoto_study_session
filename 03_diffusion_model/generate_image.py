@@ -87,7 +87,7 @@ class UNet(torch.nn.Module):
 # ======== モデル読み込み ========
 
 model = UNet().to(device)
-model.load_state_dict(torch.load("diffusion_unet.pth", map_location=device))
+model.load_state_dict(torch.load("./data/diffusion_unet.pth", map_location=device))
 model.eval()
 
 # ======== 画像生成関数 ========
@@ -112,9 +112,9 @@ def sample(model):
 
 # ======== 複数枚生成 ========
 
-os.makedirs("generated_images", exist_ok=True)
+os.makedirs("./data/generated_images", exist_ok=True)
 
 for i in range(10):
     img = sample(model).cpu().squeeze().numpy()
-    plt.imsave(f"generated_images/sample_{i}.png", img, cmap="gray")
-    print(f"Saved generated_images/sample_{i}.png")
+    plt.imsave(f"./data/generated_images/sample_{i}.png", img, cmap="gray")
+    print(f"Saved ./data/generated_images/sample_{i}.png")
